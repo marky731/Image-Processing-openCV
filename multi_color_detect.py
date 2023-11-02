@@ -4,7 +4,6 @@ import threading
 import time
 import sys
 
-url = "http://10.2.69.209:8080/video"
 
 yellow = [0,255,255]
 purple = [255,0,255]
@@ -64,7 +63,7 @@ def detec_color(color: list):
             sys.exit()
 
 
-cap = cv2.VideoCapture(url)
+cap = cv2.VideoCapture(0)
 detec_color(yellow)
             
 
