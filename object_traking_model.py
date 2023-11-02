@@ -5,6 +5,8 @@ import threading
 from ultralytics import YOLO
 import math 
 
+
+
 class Camera:
     def __init__(self, model_file, video_port):
         self.model_file = model_file
@@ -46,17 +48,24 @@ class Camera:
         return results
 
 
-
+width = 640
+higth = 640
 cv2.namedWindow('Currentframe', cv2.WINDOW_NORMAL)  # Create a resizable window
-cv2.resizeWindow('Currentframe', 480, 480)  # Set the width and height
+# cv2.resizeWindow('Currentframe', width, higth)  # Set the width and height
 
 
 the_camera = Camera('./unicornModel.pt', 0)
+
+pTime = 0
+cTime = 0
 
 while True:
     if the_camera.isCameraActive:
         try:
                 frame =  cv2.resize(the_camera.return_frame(), (640,640))
+                # frame =  the_camera.return_frame()
+
+                centerX, centerY = width//2, higth//2
 
                 position = the_camera.detectObject(frame)
 
@@ -73,7 +82,20 @@ while True:
                         if confidence >= 0.8 :
                             cv2.rectangle(frame, (x1, y1), (x2, y2), (0,255,0), 2)
                             cv2.putText(frame, str(confidence), (x1,y1), cv2.FONT_HERSHEY_COMPLEX, 1, (171,171,1), 1)
+
+                            x_centeBox = (x1+x2)/2
+                            y_centerBox = (y1+y2)/2
+
+                            cor_x = x_centeBox - centerX
+                            cor_y = centerY - y_centerBox
+                            text = f"X: {cor_x}, Y: {cor_y}"
+
+                            cv2.putText(frame, text, (x1, y2+10), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,0), 1)
         
+                cTime = time.time()
+                fps = 1/(cTime - pTime)
+                pTime = cTime
+                cv2.putText(frame, str(int(fps)),(10,70), cv2.FONT_HERSHEY_COMPLEX, 3, (255,0,255), 3)
                 cv2.imshow("Currentframe", frame)
                 key = cv2.waitKey(1)
                 if key == ord('q'):
