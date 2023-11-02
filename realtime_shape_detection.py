@@ -8,8 +8,7 @@ def nothing(x):
     # any operation
     pass
 
-url = "http://10.2.69.209:8080/video"
-cap = cv2.VideoCapture(url)
+cap = cv2.VideoCapture(0)
 
 cv2.namedWindow("Mask")
 cv2.createTrackbar("L-H", "Mask", 0, 180, nothing) 
