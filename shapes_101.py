@@ -10,7 +10,7 @@ _, threshold = cv2.threshold(gray, 225, 255, cv2.THRESH_BINARY) # thresh is the 
 img_2 = img.copy()
 contours, _ = cv2.findContours(threshold, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
-cv2.imshow("image", img_2)
+cv2.imshow("image", img_2) 
 
 
 cv2.drawContours(img, contours, -1, (255,255,0), 2)
