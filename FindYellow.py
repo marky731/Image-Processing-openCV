@@ -1,5 +1,5 @@
 import cv2
-from FunctionsForImageProcessing import get_limits, modify_image_size
+from Functions_For_ImageProcessing import get_limits, modify_image_size
 
 yellow = [0,255,255]
 red = [0,0,255]
