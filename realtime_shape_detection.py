@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from FunctionsForImageProcessing import modify_image_size # self made functions 
+from Functions_For_ImageProcessing import modify_image_size # self made functions 
 
 
 
